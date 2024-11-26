@@ -11,6 +11,6 @@
         <module>aj-pom</module>
         <module>aj-framework</module>
         <module>aj-base</module>
-        <module>aj-demo-app</module>
+        <module>aj-sample-app</module>
     </modules>
 </project>

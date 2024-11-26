@@ -9,7 +9,7 @@ public class Utils {
 	 * @param str 字符串
 	 * @return true = 空的字符串
 	 */
-	public static boolean isEmtpyString(String str) {
+	public static boolean isEmptyString(String str) {
 		return str == null || str.isEmpty() || "".equals(str);
 	}
 

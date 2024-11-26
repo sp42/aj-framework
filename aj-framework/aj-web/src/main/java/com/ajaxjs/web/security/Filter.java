@@ -22,7 +22,7 @@ public class Filter {
      * @return 清理后的字符串。
      */
     private static String clean(String str, Pattern p, Function<Matcher, String> replFn) {
-        if (Utils.isEmtpyString(str))
+        if (Utils.isEmptyString(str))
             return str;
 
         Matcher matcher = p.matcher(str);

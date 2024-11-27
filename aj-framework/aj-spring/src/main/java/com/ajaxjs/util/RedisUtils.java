@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * <a href="https://blog.csdn.net/weixin_40461281/article/details/103416876">...</a>
  * <a href="https://www.cnblogs.com/huanruke/p/16078529.html">...</a>
+ * <a href="https://redisson.org/docs/integration-with-spring">...</a>
  */
 @Data
 public class RedisUtils {
@@ -37,10 +38,8 @@ public class RedisUtils {
      * @return Redis 工具类实例
      */
     public static RedisUtils getInstance() {
-        if (SingletonHolder.INSTANCE.getRedisTemplate() == null) {
-            RedisTemplate r = (RedisTemplate) DiContextUtil.getBean("redisTemplate");
-            SingletonHolder.INSTANCE.setRedisTemplate(r);
-        }
+        if (SingletonHolder.INSTANCE.getRedisTemplate() == null)
+            SingletonHolder.INSTANCE.setRedisTemplate((RedisTemplate) DiContextUtil.getBean("redisTemplate"));
 
         return SingletonHolder.INSTANCE;
     }

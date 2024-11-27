@@ -1,6 +1,7 @@
 package com.ajaxjs.springboot;
 
 import com.ajaxjs.Version;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -25,6 +26,7 @@ import java.util.Objects;
  * 方便静态方法、JSP 调用注入的组件
  * 高级版本：<a href="https://blog.csdn.net/qq_20597727/article/details/80996190">...</a>
  */
+@Slf4j
 public class DiContextUtil implements ApplicationContextAware {
     /**
      * Spring 上下文
@@ -54,13 +56,15 @@ public class DiContextUtil implements ApplicationContextAware {
      */
     public static <T> T getBean(Class<T> clz) {
         if (context == null) {
-            System.out.println("Spring Bean 未准备好");
+            log.warn("Spring Bean 未准备好，不能返回 {} 类", clz);
             return null;
         }
 
         try {
             return context.getBean(clz);
         } catch (NoSuchBeanDefinitionException e) {
+            log.warn("No such bean of class {}.", clz);
+
             return null;
         }
     }
@@ -72,9 +76,15 @@ public class DiContextUtil implements ApplicationContextAware {
      * @return 组件对象
      */
     public static Object getBean(String beanName) {
+        if (context == null) {
+            log.warn("Spring Bean 未准备好，不能返回 {} Bean.", beanName);
+            return null;
+        }
+
         try {
             return context.getBean(beanName);
         } catch (NoSuchBeanDefinitionException e) {
+            log.warn("No such bean {}.", beanName);
             return null;
         }
     }
@@ -135,6 +145,7 @@ public class DiContextUtil implements ApplicationContextAware {
      */
     public static <T> T registryBeanInstance(Class<T> clz, String beanId) {
         registryBean(clz, beanId);
+
         return getBean(clz);
     }
 

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+//import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -19,7 +19,7 @@ public class JsonUtil {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
-        objectMapper.registerModule(new JavaTimeModule()); // 用于处理 Java 8 时间日期类型（如 LocalDate、LocalDateTime 等）的序列化和反序列化。
+//        objectMapper.registerModule(new JavaTimeModule()); // 用于处理 Java 8 时间日期类型（如 LocalDate、LocalDateTime 等）的序列化和反序列化。
         objectMapper.enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION); // 如果 JSON 中存在重复的键，将抛出异常
     }
 

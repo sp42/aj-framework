@@ -12,6 +12,8 @@ import java.io.UncheckedIOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.data.redis.core.RedisTemplate;
+
 /**
  * 接口限流
  *
@@ -77,7 +79,7 @@ public class LimitInterceptor implements HandlerInterceptor {
             return true;
 
         // 将请求路径和ip地址设为唯一标识 也可以自定义
-        String limitKey = String.format(LIMIT_KEY_TEMPLATE, request.getRequestURI(), ServletUtil.getClientIP(request));
+        String limitKey = String.format(LIMIT_KEY_TEMPLATE, request.getRequestURI(), getClientIP(request));
 
         boolean checkLimit = checkLimit(limit, limitKey);
 
@@ -90,5 +92,9 @@ public class LimitInterceptor implements HandlerInterceptor {
         }
 
         return checkLimit;
+    }
+
+    private Object getClientIP(HttpServletRequest request) {
+        return null;
     }
 }

@@ -10,6 +10,11 @@ import java.util.List;
 
 @Configuration
 public class BaseWebMvcConfigure implements WebMvcConfigurer {
+    /**
+     * Spring 程序启动的时间
+     */
+    public static final long APP_START_TIME = System.currentTimeMillis();
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new ShowControllerInterceptor());
